@@ -31,10 +31,13 @@ interface IRepo {
     .catch(error => console.error(`Unable to get the contributed repo\n${error}`));
   const repos: IRepo[] = repoResponse?.data?.user?.repositoriesContributedTo?.nodes
     .filter(repoInfo => (!repoInfo?.isFork))
-    .map(repoInfo => ({
-      name: repoInfo?.name,
+    .map(repoInfo => {
+      console.log(repoInfo);
+      return {
+      name:   repoInfo?.name,
       owner: repoInfo?.owner?.login,
-    }));
+      }
+    });
 
   /**
    * Third, get commit time and parse into commit-time/hour diagram
